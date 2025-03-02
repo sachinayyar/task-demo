@@ -43,7 +43,7 @@ pipeline {
 
         stage('image build') {
             steps {
-                sh "docker build -t $DOCKER_ORG:$NAME:${env.BUILD_NUMBER} ."
+                sh "docker build -t $DOCKER_ORG/$NAME:${env.BUILD_NUMBER} ."
             }
         }
         stage('Push image to dockerhub') {
