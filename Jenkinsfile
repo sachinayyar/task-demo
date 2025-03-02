@@ -1,6 +1,9 @@
 pipeline {
     agent any
-
+    tools {
+       jdk 'java-17'
+       maven 'maven 3.8.8'
+     }
     environment {
         PROJECT_DEV = "sampleproject-dev"
         PROJECT_PREPROD = "sampleproject-preprod"
