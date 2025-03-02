@@ -2,27 +2,59 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = 'ayyarsachin/helloworld-java'
-        IMAGE_TAG = 'latest'
-        KUBE_CONFIG = credentials('kubeconfig')  // Add your kubeconfig in Jenkins credentials
+        PROJECT_DEV = "sampleproject-dev"
+        PROJECT_PREPROD = "sampleproject-preprod"
+        PROJECT_PROD = "sampleproject-prod"
+        NAME = "helloworld-ms"
+        ENV_DEV = "dev"
+        ENV_PREPROD = "preprod"
+        ENV_PROD = "prod"
+        DOCKER_ORG = "ayyarsachin"
+    }
+    parameters {
+        choice(
+            choices: 'dev\npreprod\nprod\ndev.preprod\ndev.preprod.prod',
+            description : 'Select the environment for deployment',
+            name: 'name'
+        )
     }
 
     stages {
-        stage('Clone Repository') {
+        stage('Checkout') {
             steps {
-                git 'https://github.com/your-repo/helloworld-java.git'
+                checkout scm
             }
-        }
+        }//End of the stage checkout
 
-        stage('Build Application') {
+        stage('sonarqube analysis') {
+            steps {
+                echo "sonarqube skipped"
+            }
+        }//End of the sonarqube analysis stage
+
+        stage('maven build') {
             steps {
                 sh 'mvn clean package'
             }
         }
 
-        stage('Build Docker Image') {
+        stage('image build') {
             steps {
-                sh "docker build -t $IMAGE_NAME:$IMAGE_TAG ."
+                sh "docker build -t $DOCKER_ORG:$NAME:${env.BUILD_NUMBER} ."
+            }
+        }
+        stage('Push image to dockerhub') {
+            steps {
+                withDockerRegistry([credentialsId: 'docker-hub-credentials', url: 'https://index.docker.io/v1/']) {
+                    sh "docker push $DOCKER_ORG:$NAME:${env.BUILD_NUMBER}"
+                }
+            }
+        }
+        stage('Deployment confirmation for dev environment') {
+            steps {
+                script{
+                    input message: 'Do you want to deploy the application ${NAME}? in dev environment'
+                }
             }
         }
 
