@@ -20,7 +20,7 @@ spec:
           - name: "SONARQUBE_JDBC_USERNAME"
             value: "postgres"
           - name: "SONARQUBE_JDBC_URL"
-            value: "jdbc:postgresql://10.96.134.13:5432/sonarqube"
+            value: "jdbc:postgresql://10.98.146.157:5432/sonarqube"
           - name: "SONARQUBE_JDBC_PASSWORD"
             value: "root"
         ports:
