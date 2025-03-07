@@ -16,15 +16,12 @@ spec:
       initContainers:
         - name: fix-permissions
           image: busybox
-          command: ["sh", "-c", "chown -R 1000:1000 /opt/sonarqube"]    
+          command: ["sh", "-c", "chown -R 1000:1000 /opt/sonarqube/data /opt/sonarqube/extensions /opt/sonarqube/conf /opt/sonarqube/logs"]  
       containers:
       - name: sonarqube
         image: sonarqube:latest
         securityContext:
-          runAsUser: 1000
-          runAsGroup: 1000
-          privileged: false
-          allowPrivilegeEscalation: false        
+          runAsUser: 0       
         env:
           - name: sonar.jdbc.username
             value: "postgres"
