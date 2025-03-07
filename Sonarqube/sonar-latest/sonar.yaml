@@ -16,18 +16,11 @@ spec:
       containers:
       - name: sonarqube
         image: sonarqube:latest
-        resources:
-          requests:
-            cpu: 2000m
-            memory: 2048Mi
-          limits:
-            cpu: 6000m
-            memory: 4096Mi
         env:
           - name: sonar.jdbc.username
             value: "postgres"
           - name: sonar.jdbc.url
-            value: "jdbc:postgresql://10.96.227.213:5432/sonarqube"
+            value: "jdbc:postgresql://10.98.146.157:5432/sonarqube"
           - name: sonar.jdbc.password
             value: "root"
         ports:

@@ -7,7 +7,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 10Gi
+      storage: 250Mi
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -17,7 +17,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   capacity:
-      storage: 10Gi
+      storage: 200Mi
   hostPath: 
     path: "/opt/sonar/logs/"
     type: DirectoryOrCreate
