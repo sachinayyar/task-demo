@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: sonarqube
-        image: sonarqube:latest    
+        image: sonarqube:lts-community   
         env:
           - name: sonar.jdbc.username
             value: "postgres"
@@ -26,6 +26,13 @@ spec:
         ports:
           - containerPort: 9000
             protocol: TCP
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "500m"
+          limits:
+            memory: "2Gi"
+            cpu: "1000m"  
         volumeMounts:
         - mountPath: /opt/sonarqube/data/
           name: data
@@ -49,9 +56,6 @@ spec:
         persistentVolumeClaim:
             claimName: logs
        
-       
-        
-    
 ---
 apiVersion: v1
 kind: Service
