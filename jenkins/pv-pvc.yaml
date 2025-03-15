@@ -4,7 +4,7 @@ metadata:
   name: jenkins-pv
 spec:
   capacity:
-    storage: 500Mi
+    storage: 5Gi
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
@@ -23,5 +23,5 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 450Mi
+      storage: 3Gi
   volumeName: jenkins-pv
