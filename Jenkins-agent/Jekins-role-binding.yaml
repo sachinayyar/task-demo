@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: jenkins-rolebinding
+  namespace: jenkins-server
+subjects:
+  - kind: ServiceAccount
+    name: default  # The service account Jenkins is using
+    namespace: jenkins-server
+roleRef:
+  kind: Role
+  name: jenkins-role
+  apiGroup: rbac.authorization.k8s.io
