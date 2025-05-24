@@ -1,10 +1,11 @@
 pipeline {
     agent any
     tools {
-       jdk 'java-17'
-       maven 'maven 3.8.8'
-     }
+       jdk 'java21'
+       maven 'maven3'
+     }  
     environment {
+        SCANNER_HOME= tool 'sonar-scanner'
         PROJECT_DEV = "sampleproject-dev"
         PROJECT_PREPROD = "sampleproject-preprod"
         PROJECT_PROD = "sampleproject-prod"
@@ -29,17 +30,32 @@ pipeline {
             }
         }//End of the stage checkout
 
-        stage('sonarqube analysis') {
+        stage('Compile') {
             steps {
-                echo "sonarqube skipped"
-            }
-        }//End of the sonarqube analysis stage
-
-        stage('maven build') {
-            steps {
-                sh 'mvn clean package'
+            sh "mvn compile"
             }
         }
+        
+        stage('Test') {
+          steps {
+            sh "mvn test"
+            }
+        }//end of the maven stage
+    stage('SonarQube Analsyis') {
+        steps {
+        withSonarQubeEnv('sonar') {
+        sh ''' $SCANNER_HOME/bin/sonar-scanner
+        Dsonar.projectName=sampleproject-Dsonar.projectKey=sampleproject \-Dsonar.java.binaries=. '''
+        }
+    }
+    }
+    stage('Quality Gate') {
+        steps {
+        script {
+        waitForQualityGate abortPipeline: false, credentialsId: 'sonarqube-token'
+         }
+     }
+    }        
 
         stage('image build') {
             steps {
