@@ -37,6 +37,7 @@ pipeline {
                     export JAVA_HOME=$JAVA_HOME
                     export PATH=$JAVA_HOME/bin:$PATH
                     java -version
+                    ls -l $JAVA_HOME/bin/java
                     mvn -version
                 '''
             }
