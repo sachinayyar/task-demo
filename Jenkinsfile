@@ -29,6 +29,12 @@ pipeline {
                 checkout scm
             }
         }//End of the stage checkout
+        stage('verify java') {
+            steps {
+                sh 'echo JAVA_HOME=$JAVA_HOME'
+                sh 'java -version'
+            }
+        }//End of the stage checkout        
 
         stage('Compile') {
             steps {
