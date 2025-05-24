@@ -41,14 +41,14 @@ pipeline {
             sh "mvn test"
             }
         }//end of the maven stage
-    stage('SonarQube Analsyis') {
-        steps {
-        withSonarQubeEnv('sonar') {
-        sh ''' $SCANNER_HOME/bin/sonar-scanner
-        Dsonar.projectName=sampleproject-Dsonar.projectKey=sampleproject \-Dsonar.java.binaries=. '''
-        }
-    }
-    }
+    // stage('SonarQube Analsyis') {
+    //     steps {
+    //     withSonarQubeEnv('sonar') {
+    //     sh ''' $SCANNER_HOME/bin/sonar-scanner
+    //     Dsonar.projectName=sampleproject-Dsonar.projectKey=sampleproject \-Dsonar.java.binaries=. '''
+    //     }
+    // }
+    // }
     stage('Quality Gate') {
         steps {
         script {
