@@ -32,10 +32,8 @@ pipeline {
         stage('Environment Check') {
             steps {
                 sh '''
-                    echo JAVA_HOME=$JAVA_HOME
-                    java -version
-                    echo MAVEN_HOME=$MAVEN_HOME
-                    mvn -version
+                    export JAVA_HOME=$JAVA_HOME
+                    export PATH=$JAVA_HOME/bin:$PATH
                 '''
             }
         }
