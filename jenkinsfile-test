@@ -29,20 +29,22 @@ pipeline {
                 checkout scm
             }
         }//End of the stage checkout
-        stage('Environment Check') {
+        stage('Verify Maven') {
             steps {
                 sh '''
-                    export JAVA_HOME=$JAVA_HOME
-                    export PATH=$JAVA_HOME/bin:$PATH
+                    echo JAVA_HOME=$JAVA_HOME
+                    echo MAVEN_HOME=$MAVEN_HOME
+                    java -version
+                    mvn -version
                 '''
             }
         }
 
-        stage('Compile Project') {
+        stage('Build') {
             steps {
-                sh 'mvn clean compile'
+                sh 'mvn clean install'
             }
-        }        
+        }     
 
         stage('Compile') {
             steps {
