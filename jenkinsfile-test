@@ -32,8 +32,10 @@ pipeline {
         stage('Verify Maven') {
             steps {
                 sh '''
-                    echo JAVA_HOME=$JAVA_HOME
-                    echo MAVEN_HOME=$MAVEN_HOME
+                    echo "JAVA_HOME=$JAVA_HOME"
+                    echo "MAVEN_HOME=$MAVEN_HOME"
+                    export JAVA_HOME=$JAVA_HOME
+                    export PATH=$JAVA_HOME/bin:$PATH
                     java -version
                     mvn -version
                 '''
@@ -42,9 +44,13 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'mvn clean install'
+                sh '''
+                    export JAVA_HOME=$JAVA_HOME
+                    export PATH=$JAVA_HOME/bin:$PATH
+                    mvn clean install
+                '''
             }
-        }     
+        }   
 
         stage('Compile') {
             steps {
