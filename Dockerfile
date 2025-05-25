@@ -1,5 +1,5 @@
 # Use OpenJDK 17 base image from Docker Hub
-FROM eclipse-temurin:17-jdk-focal
+FROM docker.io/library/eclipse-temurin:17-jdk-focal
 
 # Set the working directory inside the container
 WORKDIR /app
