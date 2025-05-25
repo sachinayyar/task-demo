@@ -1,5 +1,5 @@
 # Use OpenJDK 17
-FROM openjdk:17-jdk-slim
+FROM docker.io/openjdk:17-jdk-slim
 
 # Set the working directory
 WORKDIR /app
