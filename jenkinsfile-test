@@ -8,7 +8,6 @@ pipeline {
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-cred')  // Jenkins stored Docker Hub creds
         IMAGE_NAME = 'ayyarsachin/simpleproj'
-        IMAGE_TAG = ${env.BUILD_NUMBER}
     }
     stages {
         stage('checkout') {
