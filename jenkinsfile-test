@@ -24,7 +24,8 @@ pipeline {
         stage('Build Image') {
             steps {
                 sh '''
-                buildah bud -t ${IMAGE_NAME}:${BUILD_NUMBER} .
+                buildah bud --isolation=chroot -t ${IMAGE_NAME}:${BUILD_NUMBER} .
+
                 '''
             }
         }
