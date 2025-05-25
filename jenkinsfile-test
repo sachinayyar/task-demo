@@ -1,19 +1,48 @@
 pipeline {
     agent {
         kubernetes{
-            label 'java21'
+            label 'buildah-agent'
             defaultContainer 'jnlp'
         }
+    }
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub-cred')  // Jenkins stored Docker Hub creds
+        IMAGE_NAME = 'ayyarsachin/simpleproj'
+        IMAGE_TAG = ${env.BUILD_NUMBER}
     }
     stages {
         stage('checkout') {
             steps {
                 checkout scm
             }
-        }        
+        }         
         stage('Maven Build') {
             steps {
                 sh 'mvn clean install'
+            }
+        }
+
+        stage('Build Image') {
+            steps {
+                sh '''
+                buildah bud -t ${IMAGE_NAME}:${IMAGE_TAG} .
+                '''
+            }
+        }
+
+        stage('Login to Docker Hub') {
+            steps {
+                sh '''
+                echo $DOCKERHUB_CREDENTIALS_PSW | buildah login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin docker.io
+                '''
+            }
+        }
+
+        stage('Push Image') {
+            steps {
+                sh '''
+                buildah push ${IMAGE_NAME}:${IMAGE_TAG}
+                '''
             }
         }
     }
