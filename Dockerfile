@@ -1,14 +1,14 @@
-# Use OpenJDK 17
-FROM docker.io/openjdk:17-jdk-slim
+# Use OpenJDK 17 base image from Docker Hub
+FROM docker.io/eclipse-temurin:17-jdk
 
-# Set the working directory
+# Set the working directory inside the container
 WORKDIR /app
 
-# Copy the JAR file into the container
+# Copy the Spring Boot JAR into the image
 COPY target/tekton-spring-boot-0.0.1-SNAPSHOT.jar app.jar
 
-# Expose the port
+# Expose the port your Spring Boot app listens on
 EXPOSE 8080
 
-# Command to run the application
-CMD ["java", "-jar", "app.jar"]
+# Run the JAR file
+ENTRYPOINT ["java", "-jar", "app.jar"]
