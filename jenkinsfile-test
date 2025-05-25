@@ -37,7 +37,7 @@ pipeline {
             steps {
                 sh '''
                 echo $DOCKERHUB_CREDENTIALS_PSW | buildah login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin docker.io
-                buildah push ${IMAGE_NAME}:${BUILD_NUMBER}
+                buildah push docker://docker.io/${IMAGE_NAME}:${BUILD_NUMBER}
                 '''
             }
         }
