@@ -1,7 +1,7 @@
 pipeline {
     agent {
         kubernetes{
-            label 'buildah-agent'
+            label 'java21'
             defaultContainer 'jnlp'
         }
     }
@@ -25,23 +25,16 @@ pipeline {
         stage('Build Image') {
             steps {
                 sh '''
-                buildah bud -t ${IMAGE_NAME}:${IMAGE_TAG} .
+                buildah bud -t ${IMAGE_NAME}:${BUILD_NUMBER} .
                 '''
             }
         }
 
-        stage('Login to Docker Hub') {
+        stage('Login and Push Image') {
             steps {
                 sh '''
                 echo $DOCKERHUB_CREDENTIALS_PSW | buildah login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin docker.io
-                '''
-            }
-        }
-
-        stage('Push Image') {
-            steps {
-                sh '''
-                buildah push ${IMAGE_NAME}:${IMAGE_TAG}
+                buildah push ${IMAGE_NAME}:${BUILD_NUMBER}
                 '''
             }
         }
