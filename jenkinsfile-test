@@ -17,13 +17,14 @@ pipeline {
         }         
         stage('Maven Build') {
             steps {
+            container('jnlp') {
             sh '''
                 export PATH=/opt/maven/bin:$PATH
                 mvn clean install
             '''
+                }
             }
         }
-
         stage('Build Image') {
             steps {
                 sh '''
