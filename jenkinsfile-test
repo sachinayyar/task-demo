@@ -28,7 +28,7 @@ pipeline {
             steps {
                 sh '''
                 buildah --version
-                buildah bud -t ${IMAGE_NAME}:${BUILD_NUMBER} .
+                buildah --storage-driver=vfs bud -t ${IMAGE_NAME}:${BUILD_NUMBER} .
 
                 '''
             }
