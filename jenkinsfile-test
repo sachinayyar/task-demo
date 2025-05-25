@@ -18,6 +18,7 @@ pipeline {
         stage('Maven Build') {
             steps {
             sh '''
+                export PATH=/opt/maven/bin:$PATH
                 mvn clean install
             '''
             }
