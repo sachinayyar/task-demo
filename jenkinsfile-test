@@ -27,7 +27,7 @@ pipeline {
             steps {
                 sh '''
                 buildah --version
-                buildah --storage-driver=vfs bud -t ${IMAGE_NAME}:${BUILD_NUMBER} .
+                buildah --storage-driver=overlay bud -t ${IMAGE_NAME}:${BUILD_NUMBER} .
 
                 '''
             }
@@ -38,6 +38,7 @@ pipeline {
                 sh '''
                 echo $DOCKERHUB_CREDENTIALS_PSW | buildah login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin docker.io
                 buildah push --storage-driver=vfs ${IMAGE_NAME}:${BUILD_NUMBER} docker://docker.io/${IMAGE_NAME}:${BUILD_NUMBER}
+                buildah rmi ${IMAGE_NAME}:${BUILD_NUMBER}
                 '''
             }
         }
