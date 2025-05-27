@@ -50,5 +50,28 @@ pipeline {
                 '''
             }
         }
+        stage('Deployment in staging environment') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'githubtoken', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
+                        sh '''
+                        set -e
+                        git config --global user.email "ayyarsachin@gmail.com"
+                        git config --global user.name "$USERNAME"
+                        rm -rf task-demo
+                        echo "Cloning github code"
+                        git clone -b staging https://$USERNAME:$PASSWORD@github.com/sachinayyar/task-demo.git
+                        cd task-demo
+                        sed -i "s/image: ayyarsachin\\/sampleproj:[a-zA-Z0-9|.\\/|-]*/image: ayyarsachin\\/sampleproj:${env.BUILD_NUMBER}/" Deployment.yaml
+                        echo "Checking the modified tag value in the yaml"
+                        cat Deployment.yaml
+                        git add -u
+                        git commit -m "updating deployment yaml"
+                        git push https://$USERNAME:$PASSWORD@github.com/sachinayyar/task-demo.git
+                        '''
+                    }
+                }
+            }
+        }
     }
 }
