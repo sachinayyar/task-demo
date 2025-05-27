@@ -53,20 +53,27 @@ pipeline {
         stage('Deployment in staging environment') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'github-cred', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
+                    withCredentials([usernamePassword(credentialsId: 'github-cred', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                         sh '''
                         set -e
                         git config --global user.email "ayyarsachin@gmail.com"
                         git config --global user.name "$USERNAME"
+                        
+                        echo "Removing any old cloned repo"
                         rm -rf task-demo
-                        echo "Cloning github code"
+                        
+                        echo "Cloning GitHub repository"
                         git clone -b staging https://$USERNAME:$PASSWORD@github.com/sachinayyar/task-demo.git
                         cd task-demo
-                        sed -i "s/image: ayyarsachin\\/sampleproj:[a-zA-Z0-9|.\\/|-]*/image: ayyarsachin\\/sampleproj:${env.BUILD_NUMBER}/" Deployment.yaml
-                        echo "Checking the modified tag value in the yaml"
+        
+                        echo "Updating image tag in Deployment.yaml"
+                        sed -i "s|image: ayyarsachin/sampleproj:[^[:space:]]*|image: ayyarsachin/sampleproj:${BUILD_NUMBER}|" Deployment.yaml
+        
+                        echo "Verifying updated Deployment.yaml"
                         cat Deployment.yaml
-                        git add -u
-                        git commit -m "updating deployment yaml"
+        
+                        git add Deployment.yaml
+                        git commit -m "Update image tag to build ${BUILD_NUMBER}"
                         git push https://$USERNAME:$PASSWORD@github.com/sachinayyar/task-demo.git
                         '''
                     }
