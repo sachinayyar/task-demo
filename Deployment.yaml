@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: spring-app
-  namespace: microservices
+  namespace: ms-stage
   labels:
     app: spring-app
 spec:
