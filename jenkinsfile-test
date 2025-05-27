@@ -53,7 +53,7 @@ pipeline {
         stage('Deployment in staging environment') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'githubtoken', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
+                    withCredentials([usernamePassword(credentialsId: 'github-cred', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
                         sh '''
                         set -e
                         git config --global user.email "ayyarsachin@gmail.com"
