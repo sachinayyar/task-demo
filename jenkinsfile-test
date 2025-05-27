@@ -67,7 +67,7 @@ pipeline {
                         cd task-demo
         
                         echo "Updating image tag in Deployment.yaml"
-                        sed -i "s|image: ayyarsachin/sampleproj:[^[:space:]]*|image: ayyarsachin/sampleproj:${BUILD_NUMBER}|" Deployment.yaml
+                        sed -i "s|image: ayyarsachin/simpleproj:[^[:space:]]*|image: ayyarsachin/simpleproj:${BUILD_NUMBER}|" Deployment.yaml
         
                         echo "Verifying updated Deployment.yaml"
                         cat Deployment.yaml
