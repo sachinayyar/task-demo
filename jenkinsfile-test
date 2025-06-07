@@ -6,7 +6,7 @@ pipeline {
         }
     }
     environment {
-        SONARQUBE_SERVER = 'sonar'  
+        //SONARQUBE_SERVER = 'sonar'  
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-cred')  
         IMAGE_NAME = 'ayyarsachin/simpleproj'
     }
@@ -24,13 +24,13 @@ pipeline {
             '''
             }
         }
-        stage('SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv('sonar') {  
-                    sh 'mvn sonar:sonar' 
-                }
-            }
-        }
+        // stage('SonarQube Analysis') {
+        //     steps {
+        //         withSonarQubeEnv('sonar') {  
+        //             sh 'mvn sonar:sonar' 
+        //         }
+        //     }
+        // }
         stage('Build Image') {
             steps {
                 sh '''
