@@ -1,7 +1,7 @@
 pipeline {
     agent {
         kubernetes{
-            labels 'java21'
+            label 'java21'
             defaultContainer 'jnlp'
         }
     }
