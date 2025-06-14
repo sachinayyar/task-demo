@@ -64,7 +64,7 @@ pipeline {
                         
                         echo "Cloning GitHub repository"
                         git clone -b staging https://$USERNAME:$PASSWORD@github.com/sachinayyar/task-demo.git
-                        cd task-demo
+                        cd task-demo/manifest
         
                         echo "Updating image tag in Deployment.yaml"
                         sed -i "s|image: ayyarsachin/simpleproj:[^[:space:]]*|image: ayyarsachin/simpleproj:${BUILD_NUMBER}|" Deployment.yaml
