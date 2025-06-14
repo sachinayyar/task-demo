@@ -16,7 +16,7 @@ spec:
       serviceAccountName: jenkins-sa
       containers:
       - name: jenkins
-        image: jenkins/jenkins:jdk21
+        image: jenkins:2.60.3-alpine
         ports:
         - containerPort: 8080
         resources:
