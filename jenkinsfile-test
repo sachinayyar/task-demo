@@ -41,6 +41,15 @@ pipeline {
             }
         }
 
+        stage('Scan with Trivy') {
+            steps {
+                script {
+                    // Trivy scan with summary only
+                    sh "trivy image --severity CRITICAL,HIGH --exit-code 1 --no-progress ${IMAGE_NAME}:${BUILD_NUMBER}"
+                }
+            }
+        }
+
         stage('Login and Push Image') {
             steps {
                 sh '''
