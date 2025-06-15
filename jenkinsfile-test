@@ -60,6 +60,14 @@ pipeline {
             }
         }
 
+        stage('Deployment confirmation for staging env') {
+            steps {
+                script{
+                    input message: 'Do you want to deploy the application in staging environment?'
+                }
+            }
+        }
+
         stage('Deployment in staging environment') {
             steps {
                 script {
