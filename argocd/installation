@@ -15,6 +15,7 @@ kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "NodePort"}}'
 #Fetch Password
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 
-use admin as username
+>>>>To access the dashboard http://<workernode_publicip>:<nodeport>
+>>>>use admin as username
 
 Note: once you login to the dashboard restart all the pods of argocd namespace
