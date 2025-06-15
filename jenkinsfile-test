@@ -9,8 +9,6 @@ pipeline {
         //SONARQUBE_SERVER = 'sonar'  
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-cred')  
         IMAGE_NAME = 'ayyarsachin/simpleproj'
-        NEXUS_USER = credentials('nexus-cred').usr
-        NEXUS_PASS = credentials('nexus-cred').psw
     }
     stages {
         stage('checkout') {
