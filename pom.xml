@@ -56,10 +56,4 @@
             </plugin>
 		</plugins>
 	</build>
-		 <repository>
-		  <id>maven-release</id>
-		  <name>maven-release</name>
-		  <url>http://35.236.173.101:30222/repository/maven-release/</url>
-		</repository>
-
 </project>
