@@ -9,6 +9,8 @@ pipeline {
         //SONARQUBE_SERVER = 'sonar'  
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-cred')  
         IMAGE_NAME = 'ayyarsachin/simpleproj'
+        NEXUS_USER = credentials('nexus-cred').usr
+        NEXUS_PASS = credentials('nexus-cred').psw
     }
     stages {
         stage('checkout') {
@@ -24,6 +26,18 @@ pipeline {
             '''
             }
         }
+
+        stage('Maven Deploy to Nexus') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'nexus-cred', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASS' )]) {
+                    sh '''
+                        echo "Deploying to Nexus with user: $NEXUS_USER"
+                        mvn clean deploy -s maven/settings.xml
+                    '''
+                }
+            }
+        }
+
         // stage('SonarQube Analysis') {
         //     steps {
         //         withSonarQubeEnv('sonar') {  
