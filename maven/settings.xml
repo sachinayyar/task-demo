@@ -6,7 +6,7 @@
     <mirror>
       <id>nexus</id>
       <mirrorOf>*</mirrorOf>
-      <url>http://35.236.173.101:30222/repository/maven-release/</url>
+      <url>http://35.236.173.101:30222/repository/maven-public/</url>
     </mirror>
   </mirrors>
 
@@ -19,3 +19,4 @@
   </servers>
 
 </settings>
+
