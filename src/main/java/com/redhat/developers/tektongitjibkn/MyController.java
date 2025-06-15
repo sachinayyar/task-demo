@@ -19,7 +19,7 @@ public class MyController {
     @GetMapping("/namaste")    
     public String index() {
         greeting = environment.getProperty("GREETING","Namaste");
-        greeting = greeting + " From sachin Shivaji Ayyar" + count + " on " + hostname + "\n";
+        greeting = greeting + " From Mr. Ayyar" + count + " on " + hostname + "\n";
         System.out.println(greeting);
         return greeting;
     }
