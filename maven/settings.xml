@@ -2,7 +2,7 @@
   <mirror>
     <id>nexus</id>
     <mirrorOf>*</mirrorOf>
-    <url>http://nexus.nexus.svc.cluster.local:8081/repository/maven-public/</url>
+    <url>http://35.236.173.101:30222/repository/maven-release/</url>
   </mirror>
 </mirrors>
 
