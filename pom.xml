@@ -56,5 +56,20 @@
             </plugin>
 		</plugins>
 	</build>
+  <repositories>
+    <repository>
+      <id>nexus</id>
+      <url>http://35.236.173.101:30222/repository/maven-public/</url>
+      <releases><enabled>true</enabled></releases>
+      <snapshots><enabled>true</enabled></snapshots>
+    </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>nexus</id>
+      <url>http://35.236.173.101:30222/repository/maven-public/</url>
+    </pluginRepository>
+  </pluginRepositories>	
 
 </project>
