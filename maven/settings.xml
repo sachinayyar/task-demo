@@ -4,9 +4,9 @@
   
   <mirrors>
     <mirror>
-      <id>nexus</id>
+      <id>maven-release</id>
       <mirrorOf>*</mirrorOf>
-      <url>http://35.236.173.101:30222/repository/maven-public/</url>
+      <url>http://35.236.173.101:30222/repository/maven-release/</url>
     </mirror>
   </mirrors>
 
