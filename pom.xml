@@ -16,6 +16,18 @@
 
 	<properties>
 		<java.version>11</java.version>
+		<distributionManagement>
+		  <repository>
+		    <id>maven-release</id>
+		    <!-- CHANGE HERE by your team Nexus server -->
+		    <url>http://35.236.173.101:30222/repository/maven-release/</url>
+		  </repository>
+		  <snapshotRepository>
+		    <id>maven-snapshots</id>
+		    <!-- CHANGE HERE by your team Nexus server -->
+		    <url>http://35.236.173.101:30222/repository/maven-release/</url>
+		  </snapshotRepository>
+		</distributionManagement>
 	</properties>
 
 	<dependencies>
@@ -56,20 +68,10 @@
             </plugin>
 		</plugins>
 	</build>
-  <repositories>
-    <repository>
-      <id>nexus</id>
-      <url>http://35.236.173.101:30222/repository/maven-release/</url>
-      <releases><enabled>true</enabled></releases>
-      <snapshots><enabled>true</enabled></snapshots>
-    </repository>
-  </repositories>
-
-  <pluginRepositories>
-    <pluginRepository>
-      <id>nexus</id>
-      <url>http://35.236.173.101:30222/repository/maven-release/</url>
-    </pluginRepository>
-  </pluginRepositories>	
+		 <repository>
+		  <id>maven-release</id>
+		  <name>maven-release</name>
+		  <url>http://35.236.173.101:30222/repository/maven-release/</url>
+		</repository>
 
 </project>
