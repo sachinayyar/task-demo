@@ -65,7 +65,7 @@ pipeline {
             }
         }
 
-        stage('Vulnarability Scan with Trivy') {
+        stage('Vulnarability Scan with Trivy for staging') {
             steps {
                 sh """
                 # Scan the image directly from Docker Hub (or your registry)
@@ -124,7 +124,7 @@ pipeline {
             }
         }
 
-        stage('Vulnarability Scan with Trivy') {
+        stage('Vulnarability Scan with Trivy for prod') {
             steps {
                 sh """
                 # Scan the image directly from Docker Hub (or your registry)
