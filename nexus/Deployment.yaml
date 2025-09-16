@@ -27,8 +27,9 @@ spec:
               memory: "500Mi"
               cpu: "200m"
             limits:
-              memory: "1Gi"
+              memory: "2Gi"
               cpu: "500m"
       volumes:
         - name: nexus-data
+
           emptyDir: {} # For production, replace with PersistentVolumeClaim
