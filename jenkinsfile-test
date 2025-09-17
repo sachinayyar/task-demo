@@ -60,7 +60,6 @@ pipeline {
                 sh '''
                 echo $DOCKERHUB_CREDENTIALS_PSW | buildah login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin docker.io
                 buildah push --storage-driver=vfs ${IMAGE_NAME}-ms-stage:${BUILD_NUMBER} docker://docker.io/${IMAGE_NAME}-ms-stage:${BUILD_NUMBER}
-                //buildah rmi ${IMAGE_NAME}-ms-stage:${BUILD_NUMBER}
                 '''
             }
         }
