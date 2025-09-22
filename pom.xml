@@ -17,7 +17,7 @@
 	    <distributionManagement>
 	        <snapshotRepository>
 	            <id>maven-snapshots</id>
-	            <url>http://34.135.206.223:30222/repository/maven-snapshots/</url>
+	            <url>https://nexusui.ayyarsachin.shop/repository/maven-snapshots/</url>
 	        </snapshotRepository>
 	    </distributionManagement>		
 
@@ -64,6 +64,7 @@
 		</plugins>
 	</build>
 </project>
+
 
 
 
