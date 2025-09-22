@@ -31,7 +31,7 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'nexus-cred', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASSWORD')]) {
                         sh """
                             cat $MAVEN_SETTINGS
-                            mvn clean deploy -s $MAVEN_SETTINGS -DskipTests
+                            mvn clean deploy -s $MAVEN_SETTINGS -DskipTests -Dnexus.user=$NEXUS_USER -Dnexus.password=$NEXUS_PASSWORD
                         """
                     }
                 }
