@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: wildcard-cert
+  namespace: ingress-nginx
+spec:
+  secretName: wildcard-tls-secret
+  issuerRef:
+    name: letsencrypt-prod-dns 
+    kind: ClusterIssuer
+  dnsNames:
+  - "*.ayyarsachin.shop"
