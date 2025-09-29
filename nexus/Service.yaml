@@ -3,11 +3,10 @@ kind: Service
 metadata:
   name: nexus-service
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: nexus
   ports:
     - protocol: TCP
-      port: 8081            # external service port
-      targetPort: 8081      # container port
-      nodePort: 30222       # optional, or leave it to auto-assign
+      port: 80           # external service port
+      targetPort: 8081      # container port 
