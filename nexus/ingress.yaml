@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nexus-ingress
+  namespace: nexus
+  annotations:
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    cert-manager.io/allow-shared-secret: "true" 
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - nexusui.ayyarsachin.shop
+    secretName: wildcard-tls-secret
+  rules:
+  - host: nexusui.ayyarsachin.shop
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nexus-service
+            port:
+              number: 80
