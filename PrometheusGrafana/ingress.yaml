@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: grafana-ingress
+  namespace: monitoring
+  annotations:
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    cert-manager.io/allow-shared-secret: "true" 
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - grafanaui.ayyarsachin.shop
+    secretName: wildcard-tls-secret
+  rules:
+  - host: grafanaui.ayyarsachin.shop
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: kind-prometheus-grafana
+            port:
+              number: 80
