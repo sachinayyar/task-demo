@@ -49,7 +49,8 @@ pipeline {
             steps {
                 sh '''
                 buildah --version
-                buildah --storage-driver=vfs bud -t your-image:tag .
+                buildah info | grep -i driver
+                buildah --storage-driver=overlay bud -t your-image:tag .
 
                 '''
             }
