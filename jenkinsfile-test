@@ -49,7 +49,7 @@ pipeline {
             steps {
                 sh '''
                 buildah --version
-                buildah --storage-driver=vfs --isolation chroot bud -t ${IMAGE_NAME}-ms-stage:${BUILD_NUMBER} .
+                buildah bud -t ${IMAGE_NAME}-ms-stage:${BUILD_NUMBER} .
 
                 '''
             }
