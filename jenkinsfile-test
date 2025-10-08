@@ -49,7 +49,7 @@ pipeline {
             steps {
                 sh '''
                 buildah --version
-                sudo buildah --storage-driver=overlay bud -t ${IMAGE_NAME}-ms-stage:${BUILD_NUMBER} .
+                buildah --storage-driver=overlay bud -t ${IMAGE_NAME}-ms-stage:${BUILD_NUMBER} .
 
                 '''
             }
