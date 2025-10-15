@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: elasticsearch-pv
+  namespace: elk
+spec:
+  capacity:
+    storage: 1.5Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/elk-data/elasticsearch"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: elasticsearch-pvc
+  namespace: elk
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+
+
+#As using self managed kuberentes cluster, there is no storageclass and for that need to create directory in all the worker nodes using the below commands
+#ssh into the worker node and check for the frees space with command df -h
+#create a directory using the command - sudo mkdir -p /elk-data/elasticsearch
+# provide the permission using command - sudo chown -R 1000:1000 /elk-data/elasticsearch
+
+      
