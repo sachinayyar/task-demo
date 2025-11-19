@@ -48,9 +48,10 @@ pipeline {
         stage('Build Image') {
             steps {
                 sh '''
+                export BUILDAH_STORAGE_DRIVER=vfs
                 buildah --version
                 buildah info | grep -i driver
-                buildah --storage-driver=overlay bud -t docker.io/${IMAGE_NAME}-ms-stage:latest .
+                buildah bud -t docker.io/${IMAGE_NAME}/ms-stage:latest .
 
                 '''
             }
