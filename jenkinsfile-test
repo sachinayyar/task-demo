@@ -50,7 +50,7 @@ pipeline {
                 sh '''
                 buildah --version
                 buildah --storage-driver=vfs info | grep -i driver
-                buildah --storage-driver=vfs bud -t docker.io/${IMAGE_NAME}-ms-stage:latest .
+                buildah --storage-driver=vfs bud -t docker.io/${IMAGE_NAME}-ms-stage:${BUILD_NUMBER} .
 
                 '''
             }
@@ -60,7 +60,7 @@ pipeline {
             steps {
                 sh '''
                 echo $DOCKERHUB_CREDENTIALS_PSW | buildah login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin docker.io
-                buildah push --storage-driver=vfs ${IMAGE_NAME}-ms-stage:${BUILD_NUMBER} docker://docker.io/${IMAGE_NAME}-ms-stage:${BUILD_NUMBER}
+                buildah push --storage-driver=vfs docker.io/${IMAGE_NAME}-ms-stage:${BUILD_NUMBER} docker://docker.io/${IMAGE_NAME}-ms-stage:${BUILD_NUMBER}
                 '''
             }
         }
