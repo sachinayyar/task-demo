@@ -50,7 +50,7 @@ pipeline {
                 sh '''
                 buildah --version
                 buildah info | grep -i driver
-                buildah --storage-driver=overlay bud -t your-image:tag .
+                buildah --storage-driver=overlay bud -t docker.io/${IMAGE_NAME}-ms-stage:latest .
 
                 '''
             }
