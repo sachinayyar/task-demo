@@ -10,3 +10,10 @@ kubectl get namespace
 default credentials for grafana dashaboard
 username : admin
 password : prom-operator
+
+
+-------
+use the below command to review the grafana dashboard password from secret
+
+kubectl get secret -n monitoring kind-prometheus-grafana   -o jsonpath="{.data.admin-password}" | base64 -d
+
