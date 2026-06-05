@@ -1,19 +1,21 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: sping-app-ingress
-  namespace: ms-stage
+  name: springapp-ingress
+  namespace: test-uat
   annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-cloudflare
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    cert-manager.io/allow-shared-secret: "true" 
 spec:
   ingressClassName: nginx
+
   tls:
   - hosts:
-    - myapp.ayyarsachin.shop
-    secretName: wildcard-tls-secret
+    - springapp.ayyarsachin.shop
+    secretName: wildcard-ayyarsachin-shop-tls
+
   rules:
-  - host: myapp.ayyarsachin.shop
+  - host: springapp.ayyarsachin.shop
     http:
       paths:
       - path: /
