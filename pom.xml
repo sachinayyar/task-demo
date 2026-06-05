@@ -14,12 +14,25 @@
 	<name>tekton-spring-boot</name>
 	<description>Used to illustrate a Tekton + git clone + mvn package + kn deployment pipeline</description>
 	
-	    <distributionManagement>
-	        <snapshotRepository>
-	            <id>maven-snapshots</id>
-	            <url>https://nexusui.ayyarsachin.shop/repository/maven-snapshots/</url>
-	        </snapshotRepository>
-	    </distributionManagement>		
+		<distributionManagement>
+		
+		    <repository>
+		        <id>nexus</id>
+		        <name>Nexus Releases</name>
+		        <url>
+		            https://nexus.ayyarsachin.shop/repository/maven-releases/
+		        </url>
+		    </repository>
+		
+		    <snapshotRepository>
+		        <id>nexus</id>
+		        <name>Nexus Snapshots</name>
+		        <url>
+		            https://nexus.ayyarsachin.shop/repository/maven-snapshots/
+		        </url>
+		    </snapshotRepository>
+		
+		</distributionManagement>		
 
 	<properties>
 		<java.version>11</java.version>
