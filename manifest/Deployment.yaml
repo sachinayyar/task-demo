@@ -11,6 +11,7 @@ spec:
     matchLabels:
       app: spring-app
   template:
+    serviceAccountName: imagepullsecret
     metadata:
       labels:
         app: spring-app
