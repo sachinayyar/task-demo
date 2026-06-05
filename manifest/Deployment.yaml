@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: spring-app
-  namespace: ms-stage
+  namespace: test-uat
   labels:
     app: spring-app
 spec:
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: spring-app
-          image: ayyarsachin/simpleproj-ms-stage:11
+          image: ayyarsachin/simpleproj-test-uat:11
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
