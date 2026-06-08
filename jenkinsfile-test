@@ -129,8 +129,8 @@ pipeline {
             steps {
                 sh """
                 # Scan the image directly from Docker Hub (or your registry)
-                echo $DOCKERHUB_CREDENTIALS_PSW | buildah login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin docker.io
-                trivy image --severity CRITICAL,HIGH --exit-code 0 --no-progress docker.io/${IMAGE_NAME}-ms-prod:${BUILD_NUMBER}
+                #echo $DOCKERHUB_CREDENTIALS_PSW | buildah login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin docker.io
+                trivy image --username "$DOCKERHUB_CREDENTIALS_USR" --password "$DOCKERHUB_CREDENTIALS_PSW" --severity CRITICAL,HIGH --exit-code 0 --no-progress docker.io/${IMAGE_NAME}-ms-prod:${BUILD_NUMBER}
                 """
             }
         }
