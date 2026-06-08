@@ -11,11 +11,12 @@ spec:
     matchLabels:
       app: spring-app
   template:
-    serviceAccountName: imagepullsecret
     metadata:
       labels:
         app: spring-app
     spec:
+      imagePullSecrets:
+      - name: dockerhub-secret2    
       containers:
         - name: spring-app
           image: ayyarsachin/simpleproj-ms-stage:12
