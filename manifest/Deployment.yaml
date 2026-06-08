@@ -15,8 +15,7 @@ spec:
       labels:
         app: spring-app
     spec:
-      imagePullSecrets:
-      - name: dockerhub-secret2    
+      serviceAccountName: imagepullsecret  
       containers:
         - name: spring-app
           image: ayyarsachin/simpleproj-ms-stage:12
