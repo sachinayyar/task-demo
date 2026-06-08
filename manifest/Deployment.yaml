@@ -19,7 +19,7 @@ spec:
       serviceAccountName: imagepullsecret  
       containers:
         - name: spring-app
-          image: ayyarsachin/simpleproj-ms-stage:19
+          image: ayyarsachin/simpleproj-ms-stage:15
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
