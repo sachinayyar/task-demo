@@ -5,11 +5,11 @@ name: Spring Boot CI Pipeline
 on:
   push:
     branches:
-      - main
+      - sorce-code
 
   pull_request:
     branches:
-      - main
+      - sorce-code
 
   workflow_dispatch:
 
