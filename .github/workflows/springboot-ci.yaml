@@ -43,6 +43,7 @@ jobs:
       # Step 4: Build and run tests
       - name: Build and Test
         run: |
+          sed -i 's/\r$//' mvnw
           chmod +x mvnw
           ./mvnw --batch-mode clean verify
 
