@@ -1,7 +1,6 @@
 
 name: Spring Boot CI Pipeline
 
-# When should the pipeline run?
 on:
   push:
     branches:
@@ -13,7 +12,6 @@ on:
 
   workflow_dispatch:
 
-# Permissions required for checkout
 permissions:
   contents: read
 
@@ -23,31 +21,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
-      # Step 1: Download source code
       - name: Checkout source code
-        uses: actions/checkout@v7
+        uses: actions/checkout@v4
 
-      # Step 2: Install Java
       - name: Set up JDK
-        uses: actions/setup-java@v6
+        uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
           cache: maven
 
-      # Step 3: Check Java version
       - name: Check Java version
         run: java -version
 
-      # Step 4: Build and run tests
-      - name: Build and Test
-        run: |
-          sed -i 's/\r$//' mvnw
-          chmod +x mvnw
-          ./mvnw --batch-mode clean verify
+      - name: Check Maven version
+        run: mvn -version
 
-      # Step 5: Upload JAR file
+      - name: Build and Test
+        run: mvn --batch-mode clean verify
+
       - name: Upload JAR Artifact
         uses: actions/upload-artifact@v4
         with:
